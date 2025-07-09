@@ -1,0 +1,73 @@
+========================================
+Cache Simulator Statistics Report
+========================================
+Generated: 2025-07-08 15:02:36
+
+CACHE CONFIGURATION:
+-------------------
+Cache Configuration:
+  Cache Size: 1024 bytes
+  Block Size: 32 bytes
+  Associativity: 4-way
+  Number of Sets: 8
+  Number of Blocks: 32
+  Offset Bits: 5
+  Index Bits: 3
+  Tag Bits: 56
+  Replacement Policy: LRU
+  Write Policy: Write-Back
+  Write Miss Policy: No-Write-Allocate
+
+SIMULATION DETAILS:
+------------------
+Total Memory Accesses: 17
+Simulation Time: 0.000115 seconds
+Input Trace File: examples/traces/write_demo.txt
+
+CACHE STATISTICS:
+-----------------
+Cache Statistics:
+  Total Accesses: 17
+  Hits: 5
+  Misses: 12
+  Hit Rate: 29.41%
+  Miss Rate: 70.59%
+
+  Read Accesses: 9
+  Write Accesses: 8
+  Read Hit Rate: 33.33%
+  Write Hit Rate: 25.00%
+
+  Read Hits: 3
+  Read Misses: 6
+  Write Hits: 2
+  Write Misses: 6
+
+ACCESS DETAILS:
+--------------
+     1: 0x00001000 ( READ) -> MISS
+     2: 0x00001040 ( READ) -> MISS
+     3: 0x00001080 ( READ) -> MISS
+     4: 0x000010c0 ( READ) -> MISS
+     5: 0x00001000 (WRITE) -> WRITE HIT
+     6: 0x00001020 (WRITE) -> WRITE MISS
+     7: 0x00001040 (WRITE) -> WRITE HIT
+     8: 0x00001200 (WRITE) -> WRITE MISS
+     9: 0x00001000 ( READ) -> HIT
+    10: 0x00001020 ( READ) -> MISS
+    11: 0x00001040 ( READ) -> HIT
+    12: 0x00001300 (WRITE) -> WRITE MISS
+    13: 0x00001340 (WRITE) -> WRITE MISS
+    14: 0x00001380 (WRITE) -> WRITE MISS
+    15: 0x000013c0 (WRITE) -> WRITE MISS
+    16: 0x00001000 ( READ) -> HIT
+    17: 0x00001200 ( READ) -> MISS
+
+PERFORMANCE SUMMARY:
+-------------------
+Accesses per second: 147826
+Average access time: 6.765 microseconds
+
+========================================
+End of Report
+========================================

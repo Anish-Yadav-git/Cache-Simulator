@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cache Simulator GUI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Cache Simulator</h1>
+            <p>Interactive Computer Architecture Cache Simulation</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Configuration Panel -->
+            <div class="panel config-panel">
+                <h2>⚙️ Cache Configuration</h2>
+                <div class="config-grid">
+                    <div class="config-item">
+                        <label for="cache-size">Cache Size (bytes):</label>
+                        <select id="cache-size">
+                            <option value="256">256 B</option>
+                            <option value="512">512 B</option>
+                            <option value="1024" selected>1 KB</option>
+                            <option value="2048">2 KB</option>
+                            <option value="4096">4 KB</option>
+                        </select>
+                    </div>
+
+                    <div class="config-item">
+                        <label for="block-size">Block Size (bytes):</label>
+                        <select id="block-size">
+                            <option value="16">16 B</option>
+                            <option value="32" selected>32 B</option>
+                            <option value="64">64 B</option>
+                        </select>
+                    </div>
+
+                    <div class="config-item">
+                        <label for="associativity">Associativity:</label>
+                        <select id="associativity">
+                            <option value="1">Direct Mapped</option>
+                            <option value="2">2-way</option>
+                            <option value="4" selected>4-way</option>
+                            <option value="8">8-way</option>
+                            <option value="0">Fully Associative</option>
+                        </select>
+                    </div>
+
+                    <div class="config-item">
+                        <label for="replacement-policy">Replacement Policy:</label>
+                        <select id="replacement-policy">
+                            <option value="LRU" selected>LRU</option>
+                            <option value="FIFO">FIFO</option>
+                            <option value="RANDOM">Random</option>
+                        </select>
+                    </div>
+
+                    <div class="config-item">
+                        <label for="write-policy">Write Policy:</label>
+                        <select id="write-policy">
+                            <option value="WRITE_THROUGH" selected>Write-Through</option>
+                            <option value="WRITE_BACK">Write-Back</option>
+                        </select>
+                    </div>
+
+                    <div class="config-item">
+                        <label for="write-miss-policy">Write Miss Policy:</label>
+                        <select id="write-miss-policy">
+                            <option value="WRITE_ALLOCATE" selected>Write-Allocate</option>
+                            <option value="NO_WRITE_ALLOCATE">No-Write-Allocate</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button id="create-cache" class="btn btn-primary">Create Cache</button>
+                <button id="reset-cache" class="btn btn-secondary">Reset Cache</button>
+            </div>
+
+            <!-- Memory Access Panel -->
+            <div class="panel access-panel">
+                <h2>💾 Memory Access</h2>
+                <div class="access-controls">
+                    <div class="input-group">
+                        <label for="memory-address">Memory Address (hex):</label>
+                        <input type="text" id="memory-address" placeholder="0x1000" pattern="^0x[0-9A-Fa-f]+$">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="operation-type">Operation:</label>
+                        <select id="operation-type">
+                            <option value="READ" selected>READ</option>
+                            <option value="WRITE">WRITE</option>
+                        </select>
+                    </div>
+                    
+                    <div class="access-buttons">
+                        <button id="single-access" class="btn btn-primary">Single Access</button>
+                        <button id="batch-access" class="btn btn-secondary">Batch Access</button>
+                    </div>
+                </div>
+
+                <!-- Batch Access Panel -->
+                <div id="batch-panel" class="batch-panel" style="display: none;">
+                    <h3>Batch Memory Access</h3>
+                    <textarea id="batch-addresses" placeholder="Enter addresses (one per line):&#10;0x0&#10;0x20&#10;0x40&#10;0x100"></textarea>
+                    <button id="run-batch" class="btn btn-primary">Run Batch</button>
+                </div>
+            </div>
+
+            <!-- Cache Visualization -->
+            <div class="panel cache-viz-panel">
+                <h2>🔍 Cache Visualization</h2>
+                <div id="cache-info" class="cache-info">
+                    <p>Create a cache configuration to see visualization</p>
+                </div>
+                <div id="cache-table" class="cache-table"></div>
+            </div>
+
+            <!-- Statistics Panel -->
+            <div class="panel stats-panel">
+                <h2>📊 Statistics</h2>
+                <div id="stats-content" class="stats-content">
+                    <div class="stat-item">
+                        <span class="stat-label">Total Accesses:</span>
+                        <span id="total-accesses" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Hits:</span>
+                        <span id="hits" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Misses:</span>
+                        <span id="misses" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Hit Rate:</span>
+                        <span id="hit-rate" class="stat-value">0.00%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Miss Rate:</span>
+                        <span id="miss-rate" class="stat-value">0.00%</span>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="stats-chart" width="300" height="150"></canvas>
+                </div>
+            </div>
+
+            <!-- Access Log -->
+            <div class="panel log-panel">
+                <h2>📝 Access Log</h2>
+                <div class="log-controls">
+                    <button id="clear-log" class="btn btn-secondary">Clear Log</button>
+                    <button id="export-log" class="btn btn-secondary">Export Log</button>
+                </div>
+                <div id="access-log" class="access-log"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

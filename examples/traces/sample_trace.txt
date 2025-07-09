@@ -1,0 +1,38 @@
+# Sample memory trace file for cache simulator
+# Format: <operation> <address>
+# Operations: R/READ for read, W/WRITE for write
+
+# Sequential accesses
+R 0x1000
+R 0x1004
+R 0x1008
+R 0x100C
+
+# Write operations
+W 0x2000
+W 0x2004
+W 0x2008
+
+# Mixed accesses with conflicts
+R 0x3000
+R 0x4000
+R 0x5000
+R 0x6000
+R 0x7000
+
+# Repeated accesses (should hit in cache)
+R 0x1000
+R 0x2000
+W 0x1004
+
+# More conflicts to test replacement policy
+R 0x8000
+R 0x9000
+R 0xA000
+R 0xB000
+
+# Test some edge cases
+READ 0x0
+WRITE 0xFFFFFFFF
+R 0x10000000
+W 0x20000000

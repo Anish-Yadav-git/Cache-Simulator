@@ -1,0 +1,60 @@
+========================================
+Cache Simulator Statistics Report
+========================================
+Generated: 2025-07-08 11:43:30
+
+CACHE CONFIGURATION:
+-------------------
+Cache Configuration:
+  Cache Size: 65536 bytes
+  Block Size: 64 bytes
+  Associativity: 16-way
+  Number of Sets: 64
+  Number of Blocks: 1024
+  Offset Bits: 6
+  Index Bits: 6
+  Tag Bits: 52
+  Replacement Policy: LRU
+  Write Policy: Write-Through
+  Write Miss Policy: Write-Allocate
+
+SIMULATION DETAILS:
+------------------
+Total Memory Accesses: 5
+Simulation Time: 0.000001 seconds
+
+CACHE STATISTICS:
+-----------------
+Cache Statistics:
+  Total Accesses: 5
+  Hits: 0
+  Misses: 5
+  Hit Rate: 0.00%
+  Miss Rate: 100.00%
+
+  Read Accesses: 5
+  Write Accesses: 0
+  Read Hit Rate: 0.00%
+  Write Hit Rate: 0.00%
+
+  Read Hits: 0
+  Read Misses: 5
+  Write Hits: 0
+  Write Misses: 0
+
+ACCESS DETAILS:
+--------------
+     1: 0x00000000 ( READ) -> MISS
+     2: 0x00001000 ( READ) -> MISS
+     3: 0x00002000 ( READ) -> MISS
+     4: 0x00003000 ( READ) -> MISS
+     5: 0x00004000 ( READ) -> MISS
+
+PERFORMANCE SUMMARY:
+-------------------
+Accesses per second: 5000000
+Average access time: 0.200 microseconds
+
+========================================
+End of Report
+========================================

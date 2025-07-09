@@ -1,0 +1,54 @@
+# Complex program trace simulating array processing and function calls
+# This represents a program that processes an array with function calls
+
+# Phase 1: Initialize array (sequential writes)
+W 0x10000000
+W 0x10000004
+W 0x10000008
+W 0x1000000C
+W 0x10000010
+W 0x10000014
+W 0x10000018
+W 0x1000001C
+
+# Phase 2: Process array (sequential reads with stride)
+R 0x10000000
+R 0x10000008
+R 0x10000010
+R 0x10000018
+
+# Phase 3: Function call (stack operations)
+W 0x7FFFFFFF0
+R 0x7FFFFFFF0
+W 0x7FFFFFFF4
+R 0x7FFFFFFF4
+
+# Phase 4: Access global variables
+R 0x20000000
+W 0x20000000
+R 0x20000004
+W 0x20000004
+
+# Phase 5: More array processing (with conflicts)
+R 0x10000020
+R 0x10000024
+R 0x10000028
+R 0x1000002C
+
+# Phase 6: Return to previous array elements (temporal locality)
+R 0x10000000
+R 0x10000004
+R 0x10000008
+R 0x1000000C
+
+# Phase 7: Another function call
+W 0x7FFFFFFE0
+R 0x7FFFFFFE0
+W 0x7FFFFFFE4
+R 0x7FFFFFFE4
+
+# Phase 8: Final cleanup reads
+R 0x10000010
+R 0x10000014
+R 0x20000000
+R 0x20000004

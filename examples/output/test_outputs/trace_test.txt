@@ -1,0 +1,79 @@
+========================================
+Cache Simulator Statistics Report
+========================================
+Generated: 2025-07-08 11:43:30
+
+CACHE CONFIGURATION:
+-------------------
+Cache Configuration:
+  Cache Size: 1024 bytes
+  Block Size: 32 bytes
+  Associativity: 4-way
+  Number of Sets: 8
+  Number of Blocks: 32
+  Offset Bits: 5
+  Index Bits: 3
+  Tag Bits: 56
+  Replacement Policy: LRU
+  Write Policy: Write-Through
+  Write Miss Policy: Write-Allocate
+
+SIMULATION DETAILS:
+------------------
+Total Memory Accesses: 23
+Simulation Time: 0.000001 seconds
+Input Trace File: examples/traces/sample_trace.txt
+
+CACHE STATISTICS:
+-----------------
+Cache Statistics:
+  Total Accesses: 23
+  Hits: 6
+  Misses: 17
+  Hit Rate: 26.09%
+  Miss Rate: 73.91%
+
+  Read Accesses: 17
+  Write Accesses: 6
+  Read Hit Rate: 17.65%
+  Write Hit Rate: 50.00%
+
+  Read Hits: 3
+  Read Misses: 14
+  Write Hits: 3
+  Write Misses: 3
+
+ACCESS DETAILS:
+--------------
+     1: 0x00001000 ( READ) -> MISS
+     2: 0x00001004 ( READ) -> HIT
+     3: 0x00001008 ( READ) -> HIT
+     4: 0x0000100c ( READ) -> HIT
+     5: 0x00002000 (WRITE) -> WRITE MISS
+     6: 0x00002004 (WRITE) -> WRITE HIT
+     7: 0x00002008 (WRITE) -> WRITE HIT
+     8: 0x00003000 ( READ) -> MISS
+     9: 0x00004000 ( READ) -> MISS
+    10: 0x00005000 ( READ) -> MISS
+    11: 0x00006000 ( READ) -> MISS
+    12: 0x00007000 ( READ) -> MISS
+    13: 0x00001000 ( READ) -> MISS
+    14: 0x00002000 ( READ) -> MISS
+    15: 0x00001004 (WRITE) -> WRITE HIT
+    16: 0x00008000 ( READ) -> MISS
+    17: 0x00009000 ( READ) -> MISS
+    18: 0x0000a000 ( READ) -> MISS
+    19: 0x0000b000 ( READ) -> MISS
+    20: 0x00000000 ( READ) -> MISS
+    21: 0xffffffff (WRITE) -> WRITE MISS
+    22: 0x10000000 ( READ) -> MISS
+    23: 0x20000000 (WRITE) -> WRITE MISS
+
+PERFORMANCE SUMMARY:
+-------------------
+Accesses per second: 23000000
+Average access time: 0.043 microseconds
+
+========================================
+End of Report
+========================================

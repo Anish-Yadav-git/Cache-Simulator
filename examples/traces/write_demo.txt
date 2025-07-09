@@ -1,0 +1,29 @@
+# Write operations demonstration trace
+# This trace shows how write operations affect dirty bits in different scenarios
+
+# Initial read operations to load some data
+R 0x1000
+R 0x1040
+R 0x1080
+R 0x10C0
+
+# Write operations that will show dirty bit behavior
+W 0x1000  # Write to already cached block
+W 0x1020  # Write to new address (may cause miss)
+W 0x1040  # Write to another cached block
+W 0x1200  # Write to completely new address
+
+# More reads to show cache state
+R 0x1000  # Should hit and show dirty bit
+R 0x1020  # Should hit if write-allocate
+R 0x1040  # Should hit and show dirty bit
+
+# Write to cause potential eviction
+W 0x1300
+W 0x1340
+W 0x1380
+W 0x13C0
+
+# Final reads to see final state
+R 0x1000
+R 0x1200
