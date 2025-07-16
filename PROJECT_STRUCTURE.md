@@ -37,12 +37,20 @@ cache-simulator/
 │   ├── cache_test.cpp              # Comprehensive test suite
 │   └── test_comprehensive.sh       # Automated testing script
 │
-├── 📁 gui/                         # GUI implementation
-│   ├── cache_server.cpp            # Backend server
-│   └── web/                        # Web interface
-│       ├── index.html
-│       ├── script.js
-│       └── style.css
+├── 📁 gui/                         # GUI implementations
+│   ├── qt/                         # Qt-based GUI
+│   │   ├── cache_gui.cpp           # Qt GUI implementation
+│   │   ├── cache_gui.h             # Qt GUI header
+│   │   ├── main_gui.cpp            # Qt GUI main entry
+│   │   └── README.md               # Qt GUI documentation
+│   ├── web/                        # Web-based GUI
+│   │   ├── cache_server.cpp        # HTTP server backend
+│   │   ├── interface/              # Web interface files
+│   │   │   ├── index.html          # Main web page
+│   │   │   ├── script.js           # JavaScript functionality
+│   │   │   └── style.css           # CSS styling
+│   │   └── README.md               # Web GUI documentation
+│   └── README.md                   # GUI overview
 │
 ├── 📁 build/                       # Build artifacts (git-ignored)
 │   ├── CMakeFiles/
@@ -71,6 +79,9 @@ cache-simulator/
 - **Tests** (`tests/`) verify functionality
 - **Documentation** (`docs/`) explains usage
 - **Examples** (`examples/`) demonstrate features
+- **GUI implementations** (`gui/`) provide user interfaces
+  - **Qt GUI** (`gui/qt/`) for native desktop application
+  - **Web GUI** (`gui/web/`) for browser-based interface
 
 ### 2. **Clean Build Process**
 - **Build artifacts** go to `build/` (git-ignored)

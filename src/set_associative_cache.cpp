@@ -212,3 +212,56 @@ void SetAssociativeCache::printCacheContents() const {
     }
     std::cout << "================\n\n";
 }
+
+std::string SetAssociativeCache::getCacheContentsJSON() const {
+    std::ostringstream json;
+    json << "{";
+    json << "\"sets\": [";
+    
+    for (size_t set = 0; set < num_sets_; ++set) {
+        if (set > 0) json << ", ";
+        json << "{";
+        json << "\"set_index\": " << set << ", ";
+        json << "\"blocks\": [";
+        
+        for (size_t way = 0; way < associativity_; ++way) {
+            if (way > 0) json << ", ";
+            const auto& block = cache_[set][way];
+            json << "{";
+            json << "\"way\": " << way << ", ";
+            json << "\"valid\": " << (block.valid ? "true" : "false") << ", ";
+            json << "\"dirty\": " << (block.dirty ? "true" : "false") << ", ";
+            json << "\"tag\": \"0x" << std::hex << block.tag << std::dec << "\"";
+            json << "}";
+        }
+        
+        json << "]";
+        json << "}";
+    }
+    
+    json << "]";
+    json << "}";
+    
+    return json.str();
+}
+
+bool SetAssociativeCache::isBlockValid(size_t set_index, size_t block_index) const {
+    if (set_index >= num_sets_ || block_index >= associativity_) {
+        return false;
+    }
+    return cache_[set_index][block_index].valid;
+}
+
+bool SetAssociativeCache::isBlockDirty(size_t set_index, size_t block_index) const {
+    if (set_index >= num_sets_ || block_index >= associativity_) {
+        return false;
+    }
+    return cache_[set_index][block_index].dirty;
+}
+
+uint64_t SetAssociativeCache::getBlockTag(size_t set_index, size_t block_index) const {
+    if (set_index >= num_sets_ || block_index >= associativity_) {
+        return 0;
+    }
+    return cache_[set_index][block_index].tag;
+}

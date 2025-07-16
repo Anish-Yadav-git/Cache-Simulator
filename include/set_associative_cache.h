@@ -111,6 +111,42 @@ public:
      */
     WriteMissPolicy getWriteMissPolicy() const { return write_miss_policy_; }
 
+    /**
+     * @brief Get cache contents for visualization
+     * @return Vector of cache sets with their blocks
+     */
+    const std::vector<std::vector<CacheBlock>>& getCacheContents() const { return cache_; }
+
+    /**
+     * @brief Get cache contents as JSON string for GUI
+     * @return JSON string representation of cache contents
+     */
+    std::string getCacheContentsJSON() const;
+
+    /**
+     * @brief Check if a block is valid
+     * @param set_index Set index
+     * @param block_index Block index
+     * @return True if block is valid, false otherwise
+     */
+    bool isBlockValid(size_t set_index, size_t block_index) const;
+
+    /**
+     * @brief Check if a block is dirty
+     * @param set_index Set index
+     * @param block_index Block index
+     * @return True if block is dirty, false otherwise
+     */
+    bool isBlockDirty(size_t set_index, size_t block_index) const;
+
+    /**
+     * @brief Get block tag
+     * @param set_index Set index
+     * @param block_index Block index
+     * @return Block tag
+     */
+    uint64_t getBlockTag(size_t set_index, size_t block_index) const;
+
 private:
     std::vector<std::vector<CacheBlock>> cache_; // Cache storage
     std::unique_ptr<ReplacementPolicy> replacement_policy_;

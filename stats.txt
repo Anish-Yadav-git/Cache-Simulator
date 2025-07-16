@@ -1,7 +1,7 @@
 ========================================
 Cache Simulator Statistics Report
 ========================================
-Generated: 2025-07-08 15:02:36
+Generated: 2025-07-16 14:02:44
 
 CACHE CONFIGURATION:
 -------------------
@@ -15,58 +15,48 @@ Cache Configuration:
   Index Bits: 3
   Tag Bits: 56
   Replacement Policy: LRU
-  Write Policy: Write-Back
-  Write Miss Policy: No-Write-Allocate
+  Write Policy: Write-Through
+  Write Miss Policy: Write-Allocate
 
 SIMULATION DETAILS:
 ------------------
-Total Memory Accesses: 17
-Simulation Time: 0.000115 seconds
-Input Trace File: examples/traces/write_demo.txt
+Total Memory Accesses: 8
+Simulation Time: 0.000019 seconds
 
 CACHE STATISTICS:
 -----------------
 Cache Statistics:
-  Total Accesses: 17
-  Hits: 5
-  Misses: 12
-  Hit Rate: 29.41%
-  Miss Rate: 70.59%
+  Total Accesses: 8
+  Hits: 2
+  Misses: 6
+  Hit Rate: 25.00%
+  Miss Rate: 75.00%
 
-  Read Accesses: 9
-  Write Accesses: 8
-  Read Hit Rate: 33.33%
+  Read Accesses: 4
+  Write Accesses: 4
+  Read Hit Rate: 25.00%
   Write Hit Rate: 25.00%
 
-  Read Hits: 3
-  Read Misses: 6
-  Write Hits: 2
-  Write Misses: 6
+  Read Hits: 1
+  Read Misses: 3
+  Write Hits: 1
+  Write Misses: 3
 
 ACCESS DETAILS:
 --------------
-     1: 0x00001000 ( READ) -> MISS
-     2: 0x00001040 ( READ) -> MISS
-     3: 0x00001080 ( READ) -> MISS
-     4: 0x000010c0 ( READ) -> MISS
-     5: 0x00001000 (WRITE) -> WRITE HIT
-     6: 0x00001020 (WRITE) -> WRITE MISS
-     7: 0x00001040 (WRITE) -> WRITE HIT
-     8: 0x00001200 (WRITE) -> WRITE MISS
-     9: 0x00001000 ( READ) -> HIT
-    10: 0x00001020 ( READ) -> MISS
-    11: 0x00001040 ( READ) -> HIT
-    12: 0x00001300 (WRITE) -> WRITE MISS
-    13: 0x00001340 (WRITE) -> WRITE MISS
-    14: 0x00001380 (WRITE) -> WRITE MISS
-    15: 0x000013c0 (WRITE) -> WRITE MISS
-    16: 0x00001000 ( READ) -> HIT
-    17: 0x00001200 ( READ) -> MISS
+     1: 0x00000000 ( READ) -> MISS
+     2: 0x00000020 (WRITE) -> WRITE MISS
+     3: 0x00000040 ( read) -> MISS
+     4: 0x00000060 (WRITE) -> WRITE MISS
+     5: 0x00000080 ( read) -> MISS
+     6: 0x00000100 (WRITE) -> WRITE MISS
+     7: 0x00000000 ( read) -> HIT
+     8: 0x00000000 (WRITE) -> WRITE HIT
 
 PERFORMANCE SUMMARY:
 -------------------
-Accesses per second: 147826
-Average access time: 6.765 microseconds
+Accesses per second: 421053
+Average access time: 2.375 microseconds
 
 ========================================
 End of Report

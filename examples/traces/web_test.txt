@@ -1,0 +1,29 @@
+# Web GUI Test Trace File
+# This file demonstrates various cache operations for testing the web interface
+
+# Sequential read pattern
+R 0x1000
+R 0x1020
+R 0x1040
+R 0x1060
+
+# Write operations
+W 0x2000
+W 0x2020
+W 0x2040
+
+# Mixed operations
+R 0x1000
+W 0x1000
+R 0x2000
+
+# Pattern that should cause cache misses
+R 0x3000
+R 0x4000
+R 0x5000
+R 0x6000
+
+# Return to previous addresses (should be hits or misses depending on cache size)
+R 0x1000
+R 0x2000
+R 0x3000

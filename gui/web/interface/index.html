@@ -108,6 +108,22 @@
                     <textarea id="batch-addresses" placeholder="Enter addresses (one per line):&#10;0x0&#10;0x20&#10;0x40&#10;0x100"></textarea>
                     <button id="run-batch" class="btn btn-primary">Run Batch</button>
                 </div>
+
+                <!-- Trace File Panel -->
+                <div class="trace-panel">
+                    <h3>📁 Trace File Processing</h3>
+                    <div class="trace-controls">
+                        <div class="input-group">
+                            <label for="trace-file">Select Trace File:</label>
+                            <input type="file" id="trace-file" accept=".txt,.trace" class="file-input">
+                        </div>
+                        <div class="input-group">
+                            <label for="trace-content">Or paste trace content:</label>
+                            <textarea id="trace-content" placeholder="Enter trace content (format: operation address):&#10;R 0x1000&#10;W 0x2000&#10;R 0x1000" rows="5"></textarea>
+                        </div>
+                        <button id="process-trace" class="btn btn-primary">Process Trace</button>
+                    </div>
+                </div>
             </div>
 
             <!-- Cache Visualization -->

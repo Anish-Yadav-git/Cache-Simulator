@@ -377,6 +377,55 @@ select:focus, input[type="text"]:focus, textarea:focus {
     margin-top: 15px;
 }
 
+/* Trace Panel */
+.trace-panel {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    border: 2px solid #28a745;
+}
+
+.trace-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.file-input {
+    padding: 8px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.file-input:focus {
+    outline: none;
+    border-color: #28a745;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+.cache-config {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #e9ecef;
+    border-radius: 8px;
+    border-left: 4px solid #28a745;
+}
+
+.cache-config span {
+    font-size: 14px;
+    color: #2c3e50;
+}
+
+.cache-visualization {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
 .batch-panel textarea {
     width: 100%;
     min-height: 100px;

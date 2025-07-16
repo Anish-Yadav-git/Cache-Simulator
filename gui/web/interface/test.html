@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cache Simulator Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; }
+        .error { color: red; }
+        .success { color: green; }
+        .cache-block { 
+            display: inline-block; 
+            width: 60px; 
+            height: 40px; 
+            border: 1px solid #ccc; 
+            margin: 2px; 
+            text-align: center;
+            font-size: 10px;
+            padding: 2px;
+        }
+        .cache-block.valid { background-color: #d4edda; }
+        .cache-block.dirty { background-color: #f8d7da; }
+        .cache-block.invalid { background-color: #f8f9fa; }
+    </style>
+</head>
+<body>
+    <h1>Cache Simulator Test</h1>
+    
+    <div class="test-section">
+        <h2>Server Connection Test</h2>
+        <button onclick="testConnection()">Test Connection</button>
+        <div id="connection-result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Cache Creation Test</h2>
+        <button onclick="createCache()">Create Cache</button>
+        <div id="cache-result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Cache Visualization Test</h2>
+        <button onclick="testVisualization()">Test Visualization</button>
+        <div id="visualization-result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Memory Access Test</h2>
+        <button onclick="testMemoryAccess()">Test Memory Access</button>
+        <div id="access-result"></div>
+    </div>
+    
+    <script>
+        const API_BASE = 'http://localhost:8080';
+        
+        async function testConnection() {
+            const resultDiv = document.getElementById('connection-result');
+            try {
+                const response = await fetch(`${API_BASE}/info`);
+                if (response.ok) {
+                    resultDiv.innerHTML = '<span class="success">✓ Server connection successful</span>';
+                } else {
+                    resultDiv.innerHTML = '<span class="error">✗ Server returned error: ' + response.status + '</span>';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = '<span class="error">✗ Connection failed: ' + error.message + '</span>';
+            }
+        }
+        
+        async function createCache() {
+            const resultDiv = document.getElementById('cache-result');
+            try {
+                const response = await fetch(`${API_BASE}/create?cache_size=1024&block_size=32&associativity=4&replacement_policy=LRU`);
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    resultDiv.innerHTML = '<span class="success">✓ Cache created successfully</span>';
+                } else {
+                    resultDiv.innerHTML = '<span class="error">✗ Cache creation failed: ' + data.message + '</span>';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = '<span class="error">✗ Cache creation failed: ' + error.message + '</span>';
+            }
+        }
+        
+        async function testVisualization() {
+            const resultDiv = document.getElementById('visualization-result');
+            try {
+                const response = await fetch(`${API_BASE}/contents`);
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    resultDiv.innerHTML = '<span class="success">✓ Cache contents retrieved</span>';
+                    
+                    // Display cache visualization
+                    let html = '<h3>Cache Visualization:</h3>';
+                    html += `<p>Cache Size: ${data.cache_size}, Block Size: ${data.block_size}, Associativity: ${data.associativity}, Sets: ${data.num_sets}</p>`;
+                    
+                    data.contents.forEach(set => {
+                        html += `<div>Set ${set.set}: `;
+                        set.blocks.forEach(block => {
+                            let blockClass = 'cache-block';
+                            if (block.valid) {
+                                blockClass += ' valid';
+                                if (block.dirty) {
+                                    blockClass += ' dirty';
+                                }
+                            } else {
+                                blockClass += ' invalid';
+                            }
+                            
+                            html += `<div class="${blockClass}">`;
+                            html += `V:${block.valid ? '1' : '0'}<br>`;
+                            html += `D:${block.dirty ? '1' : '0'}<br>`;
+                            html += `0x${block.tag}`;
+                            html += `</div>`;
+                        });
+                        html += '</div><br>';
+                    });
+                    
+                    resultDiv.innerHTML += html;
+                } else {
+                    resultDiv.innerHTML = '<span class="error">✗ Failed to get cache contents: ' + data.message + '</span>';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = '<span class="error">✗ Visualization failed: ' + error.message + '</span>';
+            }
+        }
+        
+        async function testMemoryAccess() {
+            const resultDiv = document.getElementById('access-result');
+            try {
+                const response = await fetch(`${API_BASE}/access?address=0x1000&operation=read`);
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    resultDiv.innerHTML = `<span class="success">✓ Memory access successful: ${data.result}</span>`;
+                    resultDiv.innerHTML += `<br>Statistics: ${data.statistics.total_accesses} accesses, ${data.statistics.hits} hits, ${data.statistics.misses} misses`;
+                } else {
+                    resultDiv.innerHTML = '<span class="error">✗ Memory access failed: ' + data.message + '</span>';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = '<span class="error">✗ Memory access failed: ' + error.message + '</span>';
+            }
+        }
+    </script>
+</body>
+</html>

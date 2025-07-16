@@ -4,6 +4,7 @@ A comprehensive, modular C++ cache simulator that models real computer memory ca
 
 ## ✨ Features
 
+### Core Simulation
 - **🏗️ Multiple Cache Types**: Direct-mapped, Set-associative, Fully associative
 - **🔄 Replacement Policies**: LRU (Least Recently Used), FIFO (First In First Out), Random
 - **✍️ Write Policies**: Write-through, Write-back with dirty bit tracking
@@ -11,27 +12,53 @@ A comprehensive, modular C++ cache simulator that models real computer memory ca
 - **📊 Detailed Statistics**: Hit rate, miss rate, read/write breakdown with performance analysis
 - **🧩 Modular Design**: Easy to extend with new policies and configurations
 - **🎯 Educational Focus**: Perfect for learning computer architecture concepts
-- **🔧 Debug Support**: Cache contents visualization and comprehensive logging
+
+### User Interfaces
+- **🎨 Qt GUI**: Modern desktop application with real-time cache visualization (`gui/qt/`)
 - **⌨️ Command Line Interface**: Comprehensive CLI with configuration options
 - **🎮 Interactive Mode**: Real-time cache experimentation and testing
+- **🌐 Web Interface**: Browser-based GUI with REST API backend (`gui/web/`)
+
+### Advanced Features
+- **🔧 Debug Support**: Cache contents visualization and comprehensive logging
 - **📋 Batch Processing**: Support for custom memory access patterns and trace files
 - **📄 File I/O**: Read trace files and write detailed statistics reports
+- **🎯 Real-time Visualization**: Live cache state display with color-coded blocks
+- **📡 Network API**: RESTful API for integration with other tools
 
 ## 🚀 Quick Start
 
 ### Build and Run
 ```bash
-# Build the project
+# Build the project (includes Qt GUI)
 make
 
-# Run with default configuration
+# Run Qt GUI (recommended)
+./bin/cache_gui
+
+# Run command-line version
 ./bin/cache_simulator
+
+# Run web server backend
+./bin/cache_server
 
 # Show help
 ./bin/cache_simulator --help
 ```
 
-### Example Usage
+### GUI Usage
+```bash
+# Start the Qt GUI application
+./bin/cache_gui
+
+# Or use the web interface:
+# 1. Start the backend server
+./bin/cache_server
+
+# 2. Open browser to: gui/web/interface/index.html
+```
+
+### Command Line Usage
 ```bash
 # Process trace file
 ./bin/cache_simulator -t examples/traces/sample_trace.txt -o examples/output/results.txt
@@ -54,7 +81,9 @@ cache-simulator/
 ├── 📁 include/                 # Header files
 ├── 📁 src/                     # Source files
 ├── 📁 tests/                   # Test files
-├── 📁 gui/                     # GUI implementation
+├── 📁 gui/                     # GUI implementations
+│   ├── qt/                     # Qt-based GUI
+│   └── web/                    # Web-based GUI
 ├── 📁 build/                   # Build artifacts (git-ignored)
 ├── 📁 bin/                     # Executables (git-ignored)
 ├── CMakeLists.txt              # CMake configuration
@@ -69,6 +98,8 @@ cache-simulator/
 - **C++17** compatible compiler (GCC 7+, Clang 5+, MSVC 2017+)
 - **CMake 3.14** or higher
 - **Make** utility
+- **Qt 6.x** (for GUI applications)
+- **Network libraries** (for web interface)
 
 ### Build Commands
 ```bash

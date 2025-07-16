@@ -9,6 +9,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -O2")
 set(CMAKE_CXX_FLAGS_DEBUG "-g -O0 -DDEBUG")
 
+# Find Qt
+find_package(Qt6 REQUIRED COMPONENTS Core Widgets Network)
+set(CMAKE_AUTOMOC ON)
+
 # Define where to find headers
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
@@ -37,8 +41,12 @@ add_executable(cache_test tests/cache_test.cpp)
 target_link_libraries(cache_test cache_lib)
 
 # GUI Server executable
-add_executable(cache_server gui/cache_server.cpp)
+add_executable(cache_server gui/web/cache_server.cpp)
 target_link_libraries(cache_server cache_lib)
+
+# Qt GUI executable
+add_executable(cache_gui gui/qt/main_gui.cpp gui/qt/cache_gui.cpp gui/qt/cache_gui.h)
+target_link_libraries(cache_gui cache_lib Qt6::Core Qt6::Widgets Qt6::Network)
 
 # Custom targets for running
 add_custom_target(run
@@ -56,5 +64,11 @@ add_custom_target(test
 add_custom_target(gui
     COMMAND cache_server
     DEPENDS cache_server
+    WORKING_DIRECTORY ${CMAKE_PROJECT_DIR}
+)
+
+add_custom_target(qt_gui
+    COMMAND cache_gui
+    DEPENDS cache_gui
     WORKING_DIRECTORY ${CMAKE_PROJECT_DIR}
 )
